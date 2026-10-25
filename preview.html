@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ahmar765 — animated GitHub profile preview</title>
+<style>
+  *{box-sizing:border-box}body{margin:0;background:#0d1117;color:#c9d1d9;font-family:Consolas,monospace}
+  main{max-width:920px;margin:60px auto;padding:24px;text-align:center}
+  h3{font-size:17px;font-weight:500;margin:0 0 22px;color:#c9d1d9}
+  .grid{display:grid;grid-template-columns:370fr 490fr;gap:10px;margin-bottom:42px}
+  img{display:block;width:100%;height:auto}.graph{margin-bottom:44px}
+  a{color:#39d353;text-decoration:none}footer{margin-top:28px;color:#8b949e;font-size:12px}
+  .notice{font-size:12px;color:#8b949e;margin-top:40px;line-height:1.7}
+  @media(max-width:600px){main{margin:20px auto;padding:14px}.grid{grid-template-columns:1fr}h3{font-size:13px}}
+</style>
+<main>
+  <h3>Ahmar765@github ~ $ ./contributions.sh</h3>
+  <img class="graph" src="contrib-heatmap.svg" alt="Contribution graph awaiting its first live sync">
+  <h3>Ahmar765@github ~ $ whoami</h3>
+  <div class="grid"><img src="avi-ascii.svg" alt="Animated ASCII monogram"><img src="info-card.svg" alt="Full-stack developer: Flutter, PHP, Python"></div>
+  <h3>Ahmar765@github ~ $ ./links.sh</h3>
+  <a href="https://github.com/Ahmar765?tab=repositories">Repositories</a> · <a href="https://github.com/Ahmar765?tab=stars">Stars</a>
+  <footer>Full-stack developer · Flutter, PHP, Python</footer>
+  <p class="notice">Local preview. The first GitHub Actions run loads your real avatar and contribution calendar.<br>See SETUP.md to activate the profile.</p>
+</main>
+</html>
