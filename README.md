@@ -16,7 +16,7 @@
   <tr>
     <td width="370" align="center" valign="middle">
       <img
-        src="./avi-ascii.svg?v=illustrated6"
+        src="./avi-ascii.svg?v=current7"
         width="300"
         alt="M Ahmar"
       />

@@ -117,13 +117,24 @@ def render_card():
 
 
 def portrait_rows():
-    prepared = ROOT / CONFIG.get('ascii_source', 'assets/ascii-source.png')
+    # Use the live avatar by default. A prepared illustration is used only
+    # when explicitly selected with "ascii_source" in profile.json.
+    prepared = ROOT / CONFIG.get('ascii_source', CONFIG['portrait'])
     if prepared.exists():
-        from PIL import Image, ImageOps, ImageFilter
+        from PIL import Image, ImageOps, ImageFilter, ImageDraw
         with Image.open(prepared) as original:
             rgba = original.convert('RGBA')
             canvas = Image.new('RGBA', rgba.size, 'white')
             canvas.alpha_composite(rgba)
+            if 'ascii_source' not in CONFIG:
+                width, height = canvas.size
+                # The current GitHub image includes a dark circular avatar
+                # frame. Exclude that frame before rendering light ASCII ink.
+                mask = Image.new('L', canvas.size, 0)
+                ImageDraw.Draw(mask).ellipse((width*.035, height*.035, width*.965, height*.965), fill=255)
+                clean = Image.new('RGBA', canvas.size, 'white')
+                clean.paste(canvas, (0, 0), mask)
+                canvas = clean.crop((int(width*.18), int(height*.025), int(width*.84), int(height*.76)))
             gray = ImageOps.grayscale(canvas.convert('RGB'))
             gray = gray.filter(ImageFilter.MedianFilter(3))
             gray = ImageOps.autocontrast(gray, cutoff=1)
