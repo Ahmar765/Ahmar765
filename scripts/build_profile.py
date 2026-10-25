@@ -124,12 +124,20 @@ def portrait_rows():
             rgba = original.convert('RGBA')
             white = Image.new('RGBA', rgba.size, 'white')
             white.alpha_composite(rgba)
-            gray = ImageOps.grayscale(white.convert('RGB'))
+            # Crop a head-and-shoulders view, keeping the hair and chin.
+            width, height = white.size
+            headshot = white.crop((int(width*.20), 0, int(width*.84), int(height*.73)))
+            gray = ImageOps.grayscale(headshot.convert('RGB'))
             gray = ImageOps.autocontrast(gray, cutoff=1)
-            gray = ImageEnhance.Contrast(gray).enhance(1.4)
-            gray = ImageOps.fit(gray, (76, 42))
-            ramp = '@%#*+=-:. '
-            return [''.join(ramp[gray.getpixel((x,y))*len(ramp)//256] for x in range(76)) for y in range(42)]
+            gray = ImageEnhance.Contrast(gray).enhance(1.12)
+            # Fit to the physical text area BEFORE sampling the character grid.
+            # Fitting directly to (columns, rows) crops off the top of the face
+            # because character cells are taller than they are wide.
+            gray = ImageOps.pad(gray, (336, 270), color=0)
+            gray = gray.resize((100, 60), Image.Resampling.LANCZOS)
+            # Match the dark terminal: shadows stay dark; highlights get ink.
+            ramp = ' .:-=+*#%@'
+            return [''.join(ramp[gray.getpixel((x,y))*len(ramp)//256] for x in range(100)) for y in range(60)]
     # Honest first-run fallback; replaced automatically when the workflow fetches the avatar.
     letters = ['    ###     ##   ## ', '   ## ##    ##   ## ', '  ##   ##   ##   ## ', '  #######   ####### ', '  ##   ##   ##   ## ', '  ##   ##   ##   ## ', '  ##   ##   ##   ## ']
     result = [''] * 8
@@ -143,14 +151,16 @@ def render_portrait():
     parts = svg_open(370, 365, f'{USER} | ASCII portrait', 'Monochrome ASCII art reveals row by row. A monogram is used until an avatar is available.')
     chrome(parts, 'avatar --ascii', 370)
     rows = portrait_rows()
+    row_height = 270 / len(rows)
+    font_size = 5.6 if len(rows[0]) == 100 else 7.3
     parts.append('<defs>')
     for index in range(len(rows)):
         delay = index * .045
         timing = f'values="0;0;338" keyTimes="0;{delay/(delay+.16):.6f};1"' if delay else 'from="0" to="338"'
-        parts.append(f'<clipPath id="row{index}"><rect x="16" y="{61+index*6.3}" width="338" height="8"><animate attributeName="width" {timing} dur="{delay+.16:.3f}s" begin="0s" fill="freeze"/></rect></clipPath>')
+        parts.append(f'<clipPath id="row{index}"><rect x="16" y="{61+index*row_height}" width="338" height="{row_height+1.5}"><animate attributeName="width" {timing} dur="{delay+.16:.3f}s" begin="0s" fill="freeze"/></rect></clipPath>')
     parts.append('</defs>')
     for index, row in enumerate(rows):
-        parts.append(text(16, 67+index*6.3, row, '#c9d1d9', 7.3, f'xml:space="preserve" clip-path="url(#row{index})"'))
+        parts.append(text(16, 61+font_size+index*row_height, row, '#c9d1d9', font_size, f'xml:space="preserve" clip-path="url(#row{index})"'))
     parts.append(text(18, 346, f'~/users/{USER}', '#8b949e', 10))
     save('avi-ascii.svg', parts)
 
