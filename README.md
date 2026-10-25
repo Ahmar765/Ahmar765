@@ -3,7 +3,7 @@
 <h3><code>Ahmar765@github ~ $ ./contributions.sh</code></h3>
 
 <img
-  src="./contrib-heatmap.svg?v=4"
+  src="./contrib-heatmap.svg?v=illustrated6"
   width="860"
   alt="Ahmar's contribution graph"
 />
@@ -16,7 +16,7 @@
   <tr>
     <td width="370" align="center" valign="middle">
       <img
-        src="https://github.com/Ahmar765.png?size=500"
+        src="./avi-ascii.svg?v=illustrated6"
         width="300"
         alt="M Ahmar"
       />

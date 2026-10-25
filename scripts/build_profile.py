@@ -117,6 +117,28 @@ def render_card():
 
 
 def portrait_rows():
+    prepared = ROOT / CONFIG.get('ascii_source', 'assets/ascii-source.png')
+    if prepared.exists():
+        from PIL import Image, ImageOps, ImageFilter
+        with Image.open(prepared) as original:
+            rgba = original.convert('RGBA')
+            canvas = Image.new('RGBA', rgba.size, 'white')
+            canvas.alpha_composite(rgba)
+            gray = ImageOps.grayscale(canvas.convert('RGB'))
+            gray = gray.filter(ImageFilter.MedianFilter(3))
+            gray = ImageOps.autocontrast(gray, cutoff=1)
+            gray = ImageOps.pad(gray, (676, 540), color=255)
+            gray = gray.resize((180, 100), Image.Resampling.LANCZOS)
+            ramp = ' .`:-=+*cs#%@'
+            rows = []
+            for y in range(100):
+                chars = []
+                for x in range(180):
+                    light = (gray.getpixel((x, y)) / 255.0) ** 1.18
+                    index = min(len(ramp)-1, round((1-light)*(len(ramp)-1)))
+                    chars.append(' ' if light >= .80 else ramp[index])
+                rows.append(''.join(chars))
+            return rows
     source = ROOT / CONFIG['portrait']
     if source.exists():
         from PIL import Image, ImageOps, ImageEnhance
@@ -152,7 +174,7 @@ def render_portrait():
     chrome(parts, 'avatar --ascii', 370)
     rows = portrait_rows()
     row_height = 270 / len(rows)
-    font_size = 5.6 if len(rows[0]) == 100 else 7.3
+    font_size = row_height * .86 if len(rows[0]) == 180 else (5.6 if len(rows[0]) == 100 else 7.3)
     parts.append('<defs>')
     for index in range(len(rows)):
         delay = index * .045
@@ -160,7 +182,8 @@ def render_portrait():
         parts.append(f'<clipPath id="row{index}"><rect x="16" y="{61+index*row_height}" width="338" height="{row_height+1.5}"><animate attributeName="width" {timing} dur="{delay+.16:.3f}s" begin="0s" fill="freeze"/></rect></clipPath>')
     parts.append('</defs>')
     for index, row in enumerate(rows):
-        parts.append(text(16, 61+font_size+index*row_height, row, '#c9d1d9', font_size, f'xml:space="preserve" clip-path="url(#row{index})"'))
+        fit = ' textLength="338" lengthAdjust="spacing"' if len(row) == 180 else ''
+        parts.append(text(16, 61+font_size+index*row_height, row, '#c9d1d9', font_size, f'xml:space="preserve" clip-path="url(#row{index})"{fit}'))
     parts.append(text(18, 346, f'~/users/{USER}', '#8b949e', 10))
     save('avi-ascii.svg', parts)
 
