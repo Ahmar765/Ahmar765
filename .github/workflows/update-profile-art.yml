@@ -35,7 +35,7 @@ jobs:
             python scripts/build_profile.py --avatar
           fi
       - name: Fetch and render real contributions
-        run: python scripts/build_profile.py --fetch
+        run: python scripts/build_profile.py --avatar --fetch
       - name: Commit updated artwork
         shell: bash
         run: |
