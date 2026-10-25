@@ -2,7 +2,7 @@
 
 <h3><code>Ahmar765@github ~ $ ./contributions.sh</code></h3>
 
-<img src="./contrib-heatmap.svg" width="860" alt="Ahmar765's contribution calendar — refreshed daily" />
+<img src="./avi-ascii.svg?v=photo2" width="860" alt="Ahmar765's contribution calendar — refreshed daily" />
 
 <br><br>
 
