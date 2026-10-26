@@ -2,31 +2,30 @@
 
 <h3><code>Ahmar765@github ~ $ ./contributions.sh</code></h3>
 
-<img
-  src="./contrib-heatmap.svg?v=illustrated6"
-  width="860"
-  alt="Ahmar's contribution graph"
-/>
+<img src="./contrib-heatmap.svg?v=8" width="860" alt="Ahmar's contribution graph" />
 
 <br><br>
 
-<h3><code>Ahmar765@github ~ $ whoami</code></h3>
+<h3><code>Ahmar765@github ~ $ ./what-i-build.sh</code></h3>
 
 <table>
   <tr>
-    <td width="370" align="center" valign="middle">
-      <img
-        src="./avi-ascii.svg?v=current7"
-        width="300"
-        alt="M Ahmar"
-      />
+    <th width="280" align="center">Mobile apps</th>
+    <th width="280" align="center">Web interfaces</th>
+    <th width="280" align="center">Backend systems</th>
+  </tr>
+  <tr>
+    <td align="center" valign="top">
+      Apps for Android and iOS<br><br>
+      <code>Flutter</code> · <code>React Native</code>
     </td>
-    <td width="490" align="center" valign="middle">
-      <img
-        src="./info-card.svg?v=4"
-        width="490"
-        alt="Ahmar's developer info card"
-      />
+    <td align="center" valign="top">
+      Websites and responsive interfaces<br><br>
+      <code>React</code>
+    </td>
+    <td align="center" valign="top">
+      APIs, application logic, and automation<br><br>
+      <code>PHP</code> · <code>Python</code>
     </td>
   </tr>
 </table>
@@ -44,18 +43,6 @@ to turn ideas into practical products across platforms.
 <br>
 I enjoy solving problems, exploring new technologies,
 and improving my craft through hands-on projects.
-</p>
-
-<br>
-
-<h3><code>Ahmar765@github ~ $ echo $STACK</code></h3>
-
-<p>
-<code>Flutter</code> ·
-<code>React Native</code> ·
-<code>React</code> ·
-<code>PHP</code> ·
-<code>Python</code>
 </p>
 
 <br>
