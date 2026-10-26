@@ -6,26 +6,30 @@
 
 <br><br>
 
-<h3><code>Ahmar765@github ~ $ ./what-i-build.sh</code></h3>
+<h3><code>Ahmar765@github ~ $ whoami</code></h3>
 
 <table>
   <tr>
-    <th width="280" align="center">Mobile apps</th>
-    <th width="280" align="center">Web interfaces</th>
-    <th width="280" align="center">Backend systems</th>
-  </tr>
-  <tr>
-    <td align="center" valign="top">
-      Apps for Android and iOS<br><br>
-      <code>Flutter</code> · <code>React Native</code>
+    <td width="370" align="left" valign="top">
+      <h4>What I build</h4>
+      <p>
+        <strong>Mobile apps</strong><br>
+        Android and iOS<br>
+        <code>Flutter</code> · <code>React Native</code>
+      </p>
+      <p>
+        <strong>Web interfaces</strong><br>
+        Websites and responsive interfaces<br>
+        <code>React</code>
+      </p>
+      <p>
+        <strong>Backend systems</strong><br>
+        APIs, application logic, and automation<br>
+        <code>PHP</code> · <code>Python</code>
+      </p>
     </td>
-    <td align="center" valign="top">
-      Websites and responsive interfaces<br><br>
-      <code>React</code>
-    </td>
-    <td align="center" valign="top">
-      APIs, application logic, and automation<br><br>
-      <code>PHP</code> · <code>Python</code>
+    <td width="490" align="center" valign="top">
+      <img src="./info-card.svg?v=8" width="490" alt="Ahmar's developer info card" />
     </td>
   </tr>
 </table>
